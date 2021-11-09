@@ -10,24 +10,4 @@ import com.olayg.nekos.model.Category
 import com.olayg.nekos.util.logMe
 import com.olayg.nekos.viewmodel.NekosViewModel
 
-class MainActivity : AppCompatActivity() {
-
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val nekosVM by viewModels<NekosViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        observeObservables()
-    }
-
-    private fun observeObservables() = with(nekosVM) {
-        categories.observe(this@MainActivity) { categories ->
-            binding.rvCategories.adapter = CategoryAdapter(categories, ::categoryClicked)
-        }
-    }
-
-    private fun categoryClicked(category: Category) {
-        category.toString().logMe()
-    }
-}
+class MainActivity : AppCompatActivity(R.layout.activity_main)
